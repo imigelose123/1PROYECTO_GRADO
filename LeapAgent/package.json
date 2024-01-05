@@ -1,0 +1,17 @@
+{
+  "name": "leapagent",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/main.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "leapjs": "^1.1.1",
+    "leapjs-plugins": "^0.1.12",
+    "nodemon": "^3.0.2"
+  }
+}
