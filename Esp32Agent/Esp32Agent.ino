@@ -12,7 +12,7 @@ void loop() {
     if (on == 1) {
       digitalWrite(LED_BUILTIN, HIGH);
     }
-
+    
     if (on == 2) {
       digitalWrite(LED_BUILTIN, LOW);
     }
