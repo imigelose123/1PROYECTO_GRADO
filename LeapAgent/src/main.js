@@ -1,9 +1,15 @@
 const Leap = require("leapjs");
-const { SerialPort } = require('serialport');
+const { SerialPort } = require("serialport");
 
+const serialport = new SerialPort({ path: "COM8", baudRate: 9600 });
+let estado = "2";
 
-const serialport = new SerialPort({ path: 'COM8', baudRate: 9600 });
-let estado = "2"
+function escribirPuertoSerial(valor, inicial) {
+  if (estado == inicial) {
+    serialport.write(valor);
+    estado = valor;
+  }
+}
 
 const InterruptorInteligente = (frame) => {
   return {
@@ -13,27 +19,22 @@ const InterruptorInteligente = (frame) => {
       const medio = hand.fingers[2];
       const anular = hand.fingers[3];
       const menique = hand.fingers[4];
-  
+
       const distancia = Leap.vec3.distance(
         pulgar.dipPosition,
         indice.dipPosition
       );
-  
-      if (distancia < 35) {
-          console.log("presionado");
-        if (estado=='2') {
-          serialport.write('1')
-          estado = '1'
-        }
-  
-      } else {
-        console.log("apado");
-        if (estado=='1') {
-          serialport.write('2')
-          estado = '2'
-        }
+
+      if (distancia > 0 && distancia < 35) {
+        console.log("presionado", distancia);
+        escribirPuertoSerial("1", "2");
       }
-    }
+
+      if (distancia > 70 && distancia < 120) {
+        console.log("apado", distancia);
+        escribirPuertoSerial("2", "1");
+      }
+    },
   };
 };
 
