@@ -26,23 +26,11 @@ Leap.loop({
     const anular = hand.fingers[3];
     const menique = hand.fingers[4];
 
-    // console.log(dedo5.positions);
-    //console.log(pulgar.dipPosition);
-
-    //const distancia = Leap.vec3.distance(
-    //pulgar.dipPosition,
-    //indice.dipPosition
-    //);
-
-    //if (distancia < 30) {
-    //console.log("precionado");
-    //} else {
-    //console.log("apagado");
-    //}
     const distancia2 = Leap.vec3.distance(
       pulgar.dipPosition,
       indice.dipPosition
     );
+    
     if (distancia2 < 35) {
         console.log("presionado");
       if (estado=='2') {
