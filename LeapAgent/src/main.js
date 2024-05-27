@@ -1,4 +1,9 @@
 const Leap = require("leapjs");
+const { SerialPort } = require('serialport');
+
+
+const serialport = new SerialPort({ path: 'COM8', baudRate: 9600 });
+let estado = "2"
 
 const miguel = (frame) => {
   return {
@@ -39,9 +44,18 @@ Leap.loop({
       indice.dipPosition
     );
     if (distancia2 < 35) {
-      console.log("presionado");
+        console.log("presionado");
+      if (estado=='2') {
+        serialport.write('1')
+        estado = '1'
+      }
+
     } else {
       console.log("apado");
+      if (estado=='1') {
+        serialport.write('2')
+        estado = '2'
+      }
     }
-  },
+  }
 }).use("miguel");
