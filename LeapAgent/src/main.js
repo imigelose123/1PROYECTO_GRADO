@@ -5,7 +5,7 @@ const { SerialPort } = require('serialport');
 const serialport = new SerialPort({ path: 'COM8', baudRate: 9600 });
 let estado = "2"
 
-const miguel = (frame) => {
+const InterruptorInteligente = (frame) => {
   return {
     hand: function (hand) {
       const pulgar = hand.fingers[0];
@@ -33,16 +33,9 @@ const miguel = (frame) => {
           estado = '2'
         }
       }
-    },
-
-    frame: (frame) => {
-      if (frame.hands.length > 0) {
-        //  this.emit("handFound");
-        //console.log("Hand found");
-      }
-    },
+    }
   };
 };
 
-Leap.Controller.plugin("miguel", miguel);
-Leap.loop({}).use("miguel");
+Leap.Controller.plugin("InterruptorInteligente", InterruptorInteligente);
+Leap.loop({}).use("InterruptorInteligente");
